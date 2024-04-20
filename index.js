@@ -9,11 +9,11 @@ const fs = require('fs');
   let butecos = [];
   let i = 1;
   do {
-    await page.goto('https://comidadibuteco.com.br/category/butecos/rio-de-janeiro/page/' + i);
+    await page.goto('https://comidadibuteco.com.br/butecos/rio-de-janeiro/page/' + i);
     const resultsSelector = '.result-inner';
 
     butecos = await page.evaluate(() => {
-      const anchors = Array.from(document.querySelectorAll('.result-inner'));
+      const anchors = Array.from(document.querySelectorAll('div.item'));
       return anchors.map(anchor => {
         const location = anchor.querySelector('p').textContent.trim();
         const nameButeco = anchor.querySelector('h2').textContent.trim();
@@ -54,9 +54,7 @@ const fs = require('fs');
 
 const getMenuButeco = async (page, link) => {
   await page.goto(link);
-
   return page.evaluate(() => {
-    const anchors = Array.from(document.querySelectorAll('.row p'));
-    return anchors[1].textContent;
-  }, '.one .mecanica');
+     return document.querySelectorAll("head > meta[name='description']")[0].content;
+  }, 'html');
 }
