@@ -9,6 +9,7 @@ const fs = require('fs');
   let butecos = [];
   let i = 1;
   do {
+    console.log("processando pagina " + i)
     await page.goto('https://comidadibuteco.com.br/butecos/rio-de-janeiro/page/' + i);
     const resultsSelector = '.result-inner';
 
